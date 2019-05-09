@@ -50,7 +50,7 @@ def call(String name, String fname = null) {
                     echo "No File Passed! Nothing to do..."
                     return;
                 } else{
-                    file = workspace.child(filename)
+                    file = workspace.child(name)
                     destFolder = file.getParent()
                     destFolder.mkdirs()
                     file.copyFrom(param.getFile())
