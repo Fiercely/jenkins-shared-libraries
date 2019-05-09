@@ -51,7 +51,10 @@ def call(String name, String fname = null) {
                 } else{
                     file = workspace.child(name)
                     destFolder = file.getParent()
-                    destFolder.mkdirs()
+                    if (!destFolder.exists())
+                    {
+                        destFolder.mkdirs()
+                    }
                     file.copyFrom(param.getFile())
                     echo "File unstashed at: " + file.getRemote()
                     return filename;
