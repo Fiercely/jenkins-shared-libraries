@@ -51,9 +51,12 @@ def call(String name, String fname = null) {
                 } else{
                     file = workspace.child(name)
                     destFolder = file.getParent()
-                    if (!destFolder.exists())
-                    {
+                    try { 
                         destFolder.mkdirs()
+                    }
+                    catch(Exception ex)
+                    {
+                        echo "Not creating folders as they exist"
                     }
                     file.copyFrom(param.getFile())
                     echo "File unstashed at: " + file.getRemote()
