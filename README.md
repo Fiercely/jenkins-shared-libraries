@@ -36,3 +36,18 @@ pipeline {
     }
 }
 ```
+
+Above assumes an implicitly loaded library.
+
+If you want to control import of library, given this library only makes use of scripts under /vars
+
+Import it like below 
+
+```
+// Where 'fileParameter' is an example of the name given to the library when configuring Global Shared Library
+// https://jenkins.io/doc/book/pipeline/shared-libraries/#using-libraries
+library 'fileParameter'
+pipeline {
+    ...
+}
+```
