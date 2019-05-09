@@ -10,11 +10,29 @@ To learn more on how you may use global shared libraries with jenkins:
 Usage with a declarative pipeline
 
 ```
-
-```
-
-Usage with a scripted pipelin
-
-```
-
+pipeline {
+    agent any
+    parameters {
+      file description: 'desc', name: 'someFolder/someFile.txt'
+      file description: 'desc2', name: 'someFolder/anotherfile.txt'
+      file description: 'desc3', name: 'filewithoutFolder.txt'
+    }
+    stages {
+        stage('CheckFolder') {
+            steps {
+                pipelineFileParameter 'someFolder/someFile.txt'
+                pipelineFileParameter 'someFolder/anotherfile.txt' 
+                pipelineFileParameter 'filewithoutFolder.txt'
+                sh "pwd"
+                sh "ls -lah"
+                sh "cat filewithoutFolder.txt"
+                sh "ls -lah someFolder"
+                sh "cat someFolder/someFile.txt"
+                sh "cat someFolder/anotherfile.txt"
+                //cleanup
+                deleteDir()
+            }
+        }
+    }
+}
 ```
